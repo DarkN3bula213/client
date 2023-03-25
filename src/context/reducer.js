@@ -14,6 +14,22 @@ const reducer = (state, action) => {
             alertText: '', 
             alertType: ''}
     }
+    if(action.type === REGISTER_USER_BEGIN){
+        return {...state, isLoading: true}
+    }
+    if(action.type === REGISTER_USER_SUCCESS){
+        return {...state, isLoading: false, token: action.payload.token, user: action.payload.user, userLocation: action.payload.location, jobLocation: action.payload.location,
+        showAlert: true, alertText: 'Registration successful', alertType: 'success'}
+    }
+    if(action.type === REGISTER_USER_ERROR){
+        return {...state, 
+            isLoading: false,
+             
+        showAlert: true,
+        alertText: action.payload.Error, 
+        alertType: 'danger'}
+    }
+
     throw new Error(`No such action : ${action.type}`)
 }
 
